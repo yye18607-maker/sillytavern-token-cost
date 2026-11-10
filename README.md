@@ -17,7 +17,7 @@
 扩展面板 → 「安装扩展」→ 选择「从 URL 安装」→ 粘贴仓库地址：
 
 ```
-https://github.com/<你的账号>/<仓库名>
+https://github.com/yye18607-maker/sillytavern-token-cost
 ```
 
 ### TauriTavern（TT）
