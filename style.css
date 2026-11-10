@@ -1,0 +1,513 @@
+/* Token 费用计算器 —— 样式
+ *
+ * 风格取向:
+ * - 跟随酒馆主题变量(--SmartTheme*),换主题自动跟随,不写死颜色
+ * - 数字用等宽字形对齐,读起来像账本
+ * - 不用渐变、不用 emoji、克制的边框与分隔线
+ */
+
+#tc-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding: 4px 0 12px;
+}
+
+/* ── 面板标题 ───────────────────────────────── */
+
+.tc-panel-head {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--SmartThemeBorderColor, rgba(0, 0, 0, 0.5));
+}
+
+.tc-panel-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--SmartThemeBodyColor, #dcdcd2);
+    letter-spacing: 0.02em;
+}
+
+.tc-panel-sub {
+    font-size: 11px;
+    color: var(--SmartThemeEmColor, #919191);
+}
+
+/* ── 分区 ───────────────────────────────────── */
+
+.tc-section {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}
+
+.tc-section-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+.tc-section-title {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--SmartThemeBodyColor, #dcdcd2);
+}
+
+.tc-section-hint {
+    font-size: 10.5px;
+    color: var(--SmartThemeEmColor, #919191);
+}
+
+/* ── 工具条 ─────────────────────────────────── */
+
+.tc-toolbar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.tc-current-model {
+    font-size: 11px;
+    color: var(--SmartThemeEmColor, #919191);
+    font-family: ui-monospace, "Cascadia Code", Consolas, monospace;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* ── 按钮 ───────────────────────────────────── */
+
+.tc-btn {
+    background: transparent;
+    border: 1px solid var(--SmartThemeBorderColor, rgba(0, 0, 0, 0.5));
+    color: var(--SmartThemeBodyColor, #dcdcd2);
+    border-radius: 4px;
+    padding: 4px 10px;
+    font-size: 11.5px;
+    font-family: inherit;
+    cursor: pointer;
+    transition: border-color 0.15s, color 0.15s;
+}
+
+.tc-btn:hover {
+    border-color: var(--SmartThemeUnderlineColor, #bce7cf);
+    color: var(--SmartThemeUnderlineColor, #bce7cf);
+}
+
+.tc-btn-primary {
+    border-style: solid;
+    border-color: var(--SmartThemeEmColor, #919191);
+    color: var(--SmartThemeBodyColor, #dcdcd2);
+}
+
+.tc-btn-small {
+    padding: 2px 8px;
+    font-size: 10.5px;
+}
+
+.tc-btn-del {
+    padding: 1px 7px;
+    font-size: 13px;
+    line-height: 1.2;
+    color: var(--SmartThemeEmColor, #919191);
+    border-color: transparent;
+}
+
+.tc-btn-del:hover {
+    color: var(--SmartThemeQuoteColor, #e18a24);
+    border-color: var(--SmartThemeBorderColor, rgba(0, 0, 0, 0.5));
+}
+
+/* ── 价格表 ─────────────────────────────────── */
+
+.tc-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 11.5px;
+    table-layout: fixed;
+}
+
+.tc-table th {
+    text-align: left;
+    font-weight: 500;
+    font-size: 10.5px;
+    color: var(--SmartThemeEmColor, #919191);
+    padding: 4px 6px;
+    border-bottom: 1px solid var(--SmartThemeBorderColor, rgba(0, 0, 0, 0.5));
+    white-space: nowrap;
+}
+
+/* 模型列占大头,三个价格列均分 */
+.tc-table th:nth-child(1) { width: 40%; }
+.tc-table th:nth-child(2),
+.tc-table th:nth-child(3),
+.tc-table th:nth-child(4) { width: 16%; }
+.tc-table th:nth-child(5) { width: 26px; }
+
+.tc-table td {
+    padding: 4px 6px;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.12);
+    vertical-align: middle;
+}
+
+.tc-table tr.tc-current td {
+    background: rgba(128, 128, 128, 0.08);
+}
+
+.tc-td-model {
+    font-family: ui-monospace, "Cascadia Code", Consolas, monospace;
+    font-size: 11px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding-right: 10px;
+}
+
+.tc-tag-current {
+    display: inline-block;
+    margin-left: 5px;
+    font-size: 9.5px;
+    padding: 0 4px;
+    border: 1px solid var(--SmartThemeEmColor, #919191);
+    border-radius: 2px;
+    color: var(--SmartThemeEmColor, #919191);
+    font-family: inherit;
+    vertical-align: 1px;
+}
+
+.tc-table input[type="number"] {
+    width: 100%;
+    min-width: 0;
+    background: transparent;
+    border: 1px solid transparent;
+    border-bottom-color: rgba(128, 128, 128, 0.22);
+    border-radius: 2px;
+    color: var(--SmartThemeBodyColor, #dcdcd2);
+    padding: 3px 5px;
+    font-size: 11.5px;
+    font-family: ui-monospace, "Cascadia Code", Consolas, monospace;
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+    box-sizing: border-box;
+}
+
+.tc-table input[type="number"]:hover {
+    border-bottom-color: var(--SmartThemeEmColor, #919191);
+}
+
+.tc-table input[type="number"]:focus {
+    outline: none;
+    border-color: var(--SmartThemeUnderlineColor, #bce7cf);
+}
+
+.tc-empty-row td {
+    border-bottom: none;
+    padding: 10px 6px;
+}
+
+.tc-empty {
+    font-size: 11.5px;
+    color: var(--SmartThemeEmColor, #919191);
+    line-height: 1.6;
+}
+
+/* ── 默认价 ─────────────────────────────────── */
+
+.tc-details {
+    border-top: 1px solid rgba(128, 128, 128, 0.12);
+    padding-top: 7px;
+    margin-top: 2px;
+}
+
+.tc-details summary {
+    cursor: pointer;
+    font-size: 11px;
+    color: var(--SmartThemeEmColor, #919191);
+    list-style: none;
+    user-select: none;
+    padding: 2px 0;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.tc-details summary::-webkit-details-marker {
+    display: none;
+}
+
+.tc-details summary::before {
+    content: "▸";
+    display: inline-block;
+    transition: transform 0.15s;
+    font-size: 9px;
+}
+
+.tc-details[open] summary::before {
+    content: "▾";
+}
+
+.tc-default-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-top: 8px;
+}
+
+/* 手动试算:模型占一整行,两个 token 各一半 */
+.tc-manual-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.tc-manual-grid label:first-child {
+    grid-column: 1 / -1;
+}
+
+.tc-default-grid label,
+.tc-manual-grid label {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    font-size: 10.5px;
+    color: var(--SmartThemeEmColor, #919191);
+    min-width: 0;
+}
+
+.tc-default-grid input,
+.tc-manual-grid input {
+    background: transparent;
+    border: 1px solid var(--SmartThemeBorderColor, rgba(0, 0, 0, 0.5));
+    border-radius: 3px;
+    color: var(--SmartThemeBodyColor, #dcdcd2);
+    padding: 4px 6px;
+    font-size: 12px;
+    font-family: ui-monospace, "Cascadia Code", Consolas, monospace;
+    font-variant-numeric: tabular-nums;
+    min-width: 0;
+    width: 100%;
+    text-overflow: ellipsis;
+}
+
+.tc-default-grid input:focus,
+.tc-manual-grid input:focus {
+    outline: none;
+    border-color: var(--SmartThemeUnderlineColor, #bce7cf);
+}
+
+/* ── 手动试算 ───────────────────────────────── */
+
+.tc-manual-result {
+    font-size: 12px;
+    min-height: 20px;
+    padding-top: 2px;
+}
+
+.tc-manual-cost {
+    font-size: 17px;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    font-family: ui-monospace, "Cascadia Code", Consolas, monospace;
+    /* 手动试算属于「手动」来源,用与来源标签一致的橙色 */
+    color: var(--SmartThemeQuoteColor, #e18a24);
+}
+
+.tc-manual-result i {
+    font-size: 10.5px;
+    color: var(--SmartThemeEmColor, #919191);
+    font-style: normal;
+}
+
+.tc-hint {
+    color: var(--SmartThemeEmColor, #919191);
+    font-size: 11.5px;
+}
+
+/* ── 统计 ───────────────────────────────────── */
+
+.tc-section + .tc-section {
+    /* 分区之间留呼吸并加分隔,避免标题跟上方内容粘连 */
+    margin-top: 14px;
+    padding-top: 13px;
+    border-top: 1px solid rgba(128, 128, 128, 0.14);
+}
+
+.tc-section-title {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--SmartThemeBodyColor, #dcdcd2);
+    padding-top: 1px;
+}
+
+.tc-summary-row {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    padding: 3px 0;
+}
+
+.tc-summary-label {
+    font-size: 11px;
+    color: var(--SmartThemeEmColor, #919191);
+    min-width: 56px;
+    flex-shrink: 0;
+}
+
+.tc-stats {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.tc-stat-item {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 4px;
+}
+
+.tc-stat-item b {
+    font-size: 13px;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    font-family: ui-monospace, "Cascadia Code", Consolas, monospace;
+    color: var(--SmartThemeBodyColor, #dcdcd2);
+}
+
+.tc-stat-item i {
+    font-size: 10px;
+    color: var(--SmartThemeEmColor, #919191);
+    font-style: normal;
+}
+
+/* ── 选项 ───────────────────────────────────── */
+
+.tc-options {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.tc-check {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 11.5px;
+    color: var(--SmartThemeBodyColor, #dcdcd2);
+    cursor: pointer;
+}
+
+.tc-check input[type="checkbox"] {
+    margin: 0;
+    accent-color: var(--SmartThemeUnderlineColor, #bce7cf);
+}
+
+.tc-currency {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11.5px;
+    color: var(--SmartThemeBodyColor, #dcdcd2);
+}
+
+.tc-currency input {
+    width: 56px;
+    background: transparent;
+    border: 1px solid var(--SmartThemeBorderColor, rgba(0, 0, 0, 0.5));
+    border-radius: 3px;
+    color: var(--SmartThemeBodyColor, #dcdcd2);
+    padding: 2px 6px;
+    font-size: 12px;
+    font-family: ui-monospace, "Cascadia Code", Consolas, monospace;
+    text-align: center;
+}
+
+/* ── 消息内徽章 ─────────────────────────────── */
+
+.tc-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin: 4px 0 2px;
+    padding: 2px 8px;
+    border: 1px solid var(--SmartThemeBorderColor, rgba(0, 0, 0, 0.5));
+    border-radius: 3px;
+    background: rgba(0, 0, 0, 0.12);
+    font-size: 11px;
+    line-height: 1.6;
+    font-variant-numeric: tabular-nums;
+    font-family: ui-monospace, "Cascadia Code", Consolas, monospace;
+    color: var(--SmartThemeEmColor, #919191);
+    width: fit-content;
+    user-select: text;
+}
+
+.tc-badge-cost {
+    color: var(--SmartThemeBodyColor, #dcdcd2);
+    font-weight: 600;
+}
+
+.tc-badge-tokens {
+    color: var(--SmartThemeEmColor, #919191);
+}
+
+.tc-sep {
+    opacity: 0.45;
+    margin: 0 2px;
+}
+
+.tc-badge-cache {
+    color: var(--SmartThemeUnderlineColor, #bce7cf);
+}
+
+.tc-badge-src {
+    font-size: 9.5px;
+    padding: 0 4px;
+    border-radius: 2px;
+    font-family: inherit;
+    letter-spacing: 0.03em;
+    border: 1px solid currentColor;
+    opacity: 0.85;
+}
+
+/* 数据来源:绿=实测,蓝灰=账单,暗黄=估算,橙=手动 */
+.tc-src-api {
+    color: #7fbf8f;
+}
+
+.tc-src-api-cost {
+    color: #6fa3c4;
+}
+
+.tc-src-estimate {
+    color: #b09a5a;
+}
+
+.tc-src-manual {
+    color: var(--SmartThemeQuoteColor, #e18a24);
+}
+
+/* ── 移动端(TT)适配 ─────────────────────────── */
+
+@media (max-width: 640px) {
+    .tc-default-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .tc-manual-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .tc-td-model {
+        max-width: 110px;
+    }
+
+    .tc-badge {
+        font-size: 10.5px;
+        padding: 1px 6px;
+    }
+}

@@ -1,0 +1,9 @@
+{
+    "display_name": "Token 费用计算器",
+    "loading_order": 100,
+    "js": "index.js",
+    "css": "style.css",
+    "author": "奶茶",
+    "version": "1.0.0",
+    "auto_update": true
+}
